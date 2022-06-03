@@ -56,14 +56,6 @@ router.post('/players', function (req, res) {
 
 
 
-
-
-
-
-
-
-
-
 router.get('/sol1', function (req, res) {
     let arr = [1, 2, 3, 5, 6, 7]
     let item = arr[0]
