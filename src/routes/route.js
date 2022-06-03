@@ -4,38 +4,59 @@ const underscore = require('underscore')
 
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    myHelper.printDate()
-    myHelper.getCurrentMonth()
-    myHelper.getCohortData()
-    let firstElement = underscore.first(['Sabiha','Akash','Pritesh'])
-    console.log('The first element received from underscope function is '+firstElement)
-    res.send('My first ever api!')
+//1
+router.get('/movies', function (req, res) {
+    const movies=['Rang de basanti','The shining','Lord of the rings','Batman begins']
+    for(var i=0;i<movies.length+1;i++){
+        
+    }
+    console.log(movies)
+    res.send(movies)
 });
 
-router.get('/hello', function (req, res) {
+//2 and 3
+router.get('/movies/:indexNumber',function(req,res){
+    const movies=['Rang de basanti','The shining','Lord of the rings','Batman begins']
+    let len=movies.length
+    let item=movies[req.params.indexNumber]
+    if(req.params.indexNumber<len){
+        console.log(item)
+        res.send(item)}
+    else {
+        console.log('ERROR:THERE IS NO MOVIE')
+        res.send('ERROR:THERE IS NO MOVIE')
+    }
+});
+
+//4 and 5
+router.get('/films/:id',function(req,res){
+const movies= [{
+    "id": 1,
+    "name": "The Shining"
+   }, {
+    "id": 2,
+    "name": "Incendies"
+   }, {
+    "id": 3,
+    "name": "Rang de Basanti"
+   }, {
+    "id": 4,
+    "name": "Finding Nemo"
+   }]
+   JSON.stringify(req.params)
+   let id=movies.id
+   let item=movies[req.params.id]
+
    
-    res.send('Hello there!')
+   if(req.params.id<4){
+       console.log(item)
+       res.send(item)
+   }
+   else{
+       console.log('ERROR:No movie exists with this id')
+       res.send('ERROR:No movie exists with this id')
+       
+   }
 });
-
-router.get('/candidates', function(req, res){
-    console.log('Query paramters for this request are '+JSON.stringify(req.query))
-    let gender = req.query.gender
-    let state = req.query.state
-    let district = req.query.district
-    console.log('State is '+state)
-    console.log('Gender is '+gender)
-    console.log('District is '+district)
-    let candidates = ['Akash','Suman']
-    res.send(candidates)
-})
-
-router.get('/candidates/:canidatesName', function(req, res){
-    console.log('The request objects is '+ JSON.stringify(req.params))
-    console.log('Candidates name is '+req.params.canidatesName)
-    res.send('Done')
-})
-
 
 module.exports = router;
-// adding this comment for no reason
